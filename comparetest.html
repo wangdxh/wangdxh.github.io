@@ -281,10 +281,10 @@
             },
             methods: {
                 clickleftbtn(){
-                    //document.getElementsByClassName('img')[0].scrollIntoView();
+                    document.getElementsByClassName('img')[0].scrollIntoView();
                 },
                 clickrightbtn(){
-                    //document.getElementsByClassName('img')[this.imglists.length-1].scrollIntoView();
+                    document.getElementsByClassName('img')[this.imglists.length-1].scrollIntoView();
                 },
                 clickimglist(index) {
                     this.curimgindex = index;
@@ -310,7 +310,7 @@
                         }
                     }
                     if (findinx != -1) {
-                        //document.getElementsByClassName('img')[findinx].scrollIntoView();
+                        document.getElementsByClassName('img')[findinx].scrollIntoView();
                     }
                     this.curimgindex = findinx
                 },
