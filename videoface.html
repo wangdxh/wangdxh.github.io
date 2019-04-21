@@ -223,8 +223,8 @@
           let video = document.getElementById('video');
           let canvas = document.getElementById('canvas');
           let ctx = canvas.getContext('2d')
-
-          ctx.drawImage(video, 0, 0, 480, 320);
+          // change
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
           canvas.toBlob(this.blobcallback, "image/jpeg", 0.95)
         },
@@ -281,7 +281,7 @@
           let ctx = canvas.getContext('2d')
           ctx.lineWidth = 2
           ctx.strokeStyle = 'blue'
-          ctx.clearRect(0, 0, 480, 320)
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
           /*for (const iter of this.objectlist) {
             ctx.strokeRect(iter.left, iter.top, iter.width, iter.height)// x, y width height  
           }*/
@@ -313,10 +313,15 @@
           video.srcObject = stream;
           video.play();
           console.log(video)
-          video.addEventListener("playing", function(){
-            //this.settimer()
-            console.log(video)
-            console.log(this.width, this.height, this.videoWidth, this.videoHeight)
+          video.addEventListener("playing", function(){          
+
+            let video = document.getElementById('video');
+            let canvas = document.getElementById('canvas');
+            video.width = video.videoWidth
+            video.height = video.videoHeight
+            canvas.width = video.width
+            canvas.height = video.height
+            console.log('change video and canvas :', video.videoWidth, video.videoHeight)
           }, false);
         },
         error(error) {
