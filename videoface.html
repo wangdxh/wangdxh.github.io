@@ -312,10 +312,11 @@
           let video = document.getElementById('video');
           video.srcObject = stream;
           video.play();
-
-          video.addEventListener("playing", ()=>{
+          console.log(video)
+          video.addEventListener("playing", function(){
             //this.settimer()
-
+            console.log(video)
+            console.log(this.width, this.height, this.videoWidth, this.videoHeight)
           }, false);
         },
         error(error) {
