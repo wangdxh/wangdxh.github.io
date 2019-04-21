@@ -333,7 +333,7 @@
             
           }
           //调用用户媒体设备, 访问摄像头
-          getUserMedia({ video: { /*width: 320, height: 480,*/ facingMode:  "environment"}, audio: false }, this.success, this.error);
+          getUserMedia({ video: { /*width: 320, height: 480, environment*/ facingMode:  "user"}, audio: false }, this.success, this.error);
         } else {
           alert('不支持摄像头访问用户媒体');
         }
