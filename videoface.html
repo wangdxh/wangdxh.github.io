@@ -212,6 +212,8 @@
         objectlist: [],
         timerfacedetect: null,
         btimeron:false,
+        videoWidth:0,
+        videoHeight:0,
       },
       methods: {
         operatortimer(){
@@ -315,13 +317,9 @@
           console.log(video)
           video.addEventListener("playing", function(){          
 
-            let video = document.getElementById('video');
-            let canvas = document.getElementById('canvas');
-            video.width = video.videoWidth
-            video.height = video.videoHeight
-            canvas.width = video.width
-            canvas.height = video.height
-            console.log('change video and canvas :', video.videoWidth, video.videoHeight)
+            vm.videoWidth = this.videoWidth
+            vm.videoHeight = this.videoHeight
+            console.log('vm width height: ', vm.videoWidth, vm.videoHeight)
           }, false);
         },
         error(error) {
