@@ -181,8 +181,8 @@
 
     <div class="preview-footer">
       <div class="buttons">
-        <button class="g-btn" @click="operatortimer" v-text="btimeron ? '停止定时器': '开启定时器'"></button>
-        <button class="g-btn" @click="clickupload">选取这张</button>
+        <button class="g-btn" @click="operatortimer" v-text="btimeron ? '停止追踪': '开启追踪'"></button>
+        <button class="g-btn" @click="clickupload">暂时无用</button>
         <div class="g-upload-buttons-msg">some test text</div>
       </div>
     </div>
@@ -233,6 +233,7 @@
 
         blobcallback(blob) {
           console.log('get blob')
+          
           this.getfaceresult('image_file', blob)
         },
 
@@ -261,14 +262,8 @@
 
               for (let inx = 0; inx < res.data.faces.length; inx++) {
                 const item = res.data.faces[inx];
-
-                this.objectlist.push(item.face_rectangle
-                  /*{
-                    left: item.face_rectangle.left*scale,
-                    top: item.face_rectangle.top*scale,
-                    right:(item.face_rectangle.left+item.face_rectangle.width)*scale,
-                    bottom:(item.face_rectangle.top+item.face_rectangle.height)*scale
-                  }*/);
+                console.log(item.face_rectangle)
+                this.objectlist.push(item.face_rectangle);
               }
               this.drawfacerect()
             })
@@ -326,29 +321,7 @@
         error(error) {
           alert(`访问用户媒体设备失败: ${error.name}, ${error.message}`);
         },
-        convertcoordinate(rect) {
-          let dstwidth = 480, dstheight = 320;
-          let xscale = dstwidth / this.videoWidth
-          let yscale = dstheight / this.videoHeight
-          
-          let scale = xscale > yscale ? yscale : xscale
-          if (xscale > 1.0 && yscale > 1.0) {
-            scale = 1
-            console.warn('set scale to 1.0')
-          }
-          let xmove = (dstwidth - this.videoWidth*scale)/2
-          let ymove = (dstheight - this.videoHeight*xscale)/2;
-
-          console.log(xmove, xscale, ymove, yscale, scale)
-          let converdata = {
-            left: parseInt( xmove + rect.left * scale),
-            top: parseInt(ymove + rect.top * scale),
-            width: parseInt(rect.width * scale),
-            height: parseInt(rect.height * scale)
-          };
-          console.log(converdata)
-          return converdata
-        },
+        
 
       },
       mounted() {
@@ -360,7 +333,7 @@
             
           }
           //调用用户媒体设备, 访问摄像头
-          getUserMedia({ video: { /*width: 480, height: 320,*/  facingMode:  "environment"}, audio: false }, this.success, this.error);
+          getUserMedia({ video: { width: 320, height: 480,  facingMode:  "environment"}, audio: false }, this.success, this.error);
         } else {
           alert('不支持摄像头访问用户媒体');
         }
